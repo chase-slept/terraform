@@ -1,18 +1,12 @@
-terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-      version = "~> 4.16"
-    }
-  }
-  required_version = ">= 1.2.0"
-}
-
 provider "aws" {
   shared_config_files      = ["~/.aws/config"]
   shared_credentials_files = ["~/.aws/credentials"]
   profile                  = "terraform_user"
   region = var.aws_region
+}
+
+provider "cloudflare" {
+  api_token = var.cloudflare_api_token
 }
 
 resource "aws_s3_bucket" "site" {
@@ -80,4 +74,20 @@ resource "aws_s3_bucket_policy" "site" {
   depends_on = [
     aws_s3_bucket_public_access_block.site
   ]
+}
+
+data "cloudflare_zones" "domain" {
+  filter {
+    name = var.site_domain
+  }
+}
+
+resource "cloudflare_record" "site_cname" {
+  zone_id = data.cloudflare_zones.domain.zones[0].id
+  name    = var.sub_domain
+  value   = var.site_domain
+  type    = "CNAME"
+
+  ttl     = 1
+  proxied = true
 }

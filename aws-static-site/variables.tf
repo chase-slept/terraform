@@ -6,7 +6,6 @@ variable "aws_region" {
 variable "sub_domain" {
   type = string
   description = "The subdomain to set for our CNAME record in Cloudflare"
-  default = tf-test
 }
 
 variable "site_domain" {

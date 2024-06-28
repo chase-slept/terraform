@@ -15,11 +15,11 @@ provider "aws" {
   region = var.aws_region
 }
 
-resource = "aws_s3_bucket" "site" {
+resource "aws_s3_bucket" "site" {
   bucket = "tf-test-site-bucket"
 }
 
-resource = "aws_s3_bucket_public_access_block" "site" {
+resource "aws_s3_bucket_public_access_block" "site" {
   bucket = aws_s3_bucket.site.id
 
   block_public_acls = false
@@ -28,7 +28,7 @@ resource = "aws_s3_bucket_public_access_block" "site" {
   restrict_public_buckets = false
 }
 
-resource = "aws_s3_bucket_website_configuration" "site" {
+resource "aws_s3_bucket_website_configuration" "site" {
   bucket = aws_s3_bucket.site.id
 
   index_document {
@@ -40,7 +40,7 @@ resource = "aws_s3_bucket_website_configuration" "site" {
   }
 }
 
-resource = "aws_s3_bucket_ownership_controls" "site" {
+resource "aws_s3_bucket_ownership_controls" "site" {
   bucket = aws_s3_bucket.site.id
 
   rule {
@@ -48,7 +48,7 @@ resource = "aws_s3_bucket_ownership_controls" "site" {
   }
 }
 
-resource = "aws_s3_bucket_acl" "site" {
+resource "aws_s3_bucket_acl" "site" {
   bucket = aws_s3_bucket.site.id
 
   acl = "public-read"
@@ -58,7 +58,7 @@ resource = "aws_s3_bucket_acl" "site" {
   ]
 }
 
-resource =  "aws_s3_bucket_policy" "site" {
+resource "aws_s3_bucket_policy" "site" {
   bucket = aws_s3_bucket.site.id
 
   policy = jsonencode({

@@ -16,6 +16,8 @@ This project is intended to help me learn Terraform by building infrastructure o
 
 This Terraform workflow sets up an S3 bucket using the AWS CLI, sets its permissions to allow public access and static website hosting, and outputs the bucket's endpoint URL (which can be output with `terraform output` after the plan is applied). It also configures a CNAME record in Cloudflare to set up a subdomain to point to our website. For now, this workflow only sets up the AWS infra and subdomain in Cloudflare--some work still needs to be done to further automate it.
 
+The completed website (its nothing special, don't get your hopes up) is available at this test subdomain: [tf-test.slept.dev](https://tf-test.slept.dev)
+
 ## Notes/To Do
 
 Some work still needs to be done to finish this workflow.

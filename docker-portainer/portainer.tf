@@ -18,7 +18,7 @@ resource "docker_container" "portainer" {
   image = docker_image.portainer.image_id
   restart = "unless-stopped"
   network_mode = "a8c542978b5600050a39471c7d5e832a8528154790cd621813f449ddd0d79f30"
- }
+}
 
 resource "docker_image" "portainer" {
   name = "portainer/portainer-ce:latest"
